@@ -15,4 +15,4 @@ conda env list
 
 Execute scripts using python.exe
 
-Script yolo_tracking_bytetrack.py will download a model to models folder and open a window to start tracking using bytetrack algorithm
+Script yolo_tracking.py will download a model to models folder and open a window to start tracking
