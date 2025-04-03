@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import filedialog
 import argparse
 import os
+import sys  # Import sys for exiting the script
 
 # Parse command-line arguments
 parser = argparse.ArgumentParser(description="YOLO Tracking Script")
@@ -19,7 +20,12 @@ args = parser.parse_args()
 model_path = os.path.join("models", f"{args.model}.pt")
 
 # Load the specified model
-model = YOLO(model_path)
+try:
+    model = YOLO(model_path)
+    print(f"Model '{model_path}' loaded successfully.")
+except Exception as e:
+    print(f"Error loading model '{model_path}': {e}")
+    sys.exit(1)
 
 
 if args.source == "webcam":
