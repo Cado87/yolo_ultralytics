@@ -25,3 +25,6 @@ python yolo_tracking.py --source video --model yolo11n --tracker parameters
 --source: webcam or video
 --model: yolo11n, yolo11n-seg, yolo11n-pose, etc
 --tracker: default, parameters, bytetrack or botsort
+
+To run script to plot tracking trajectory:
+python .\plotting_tracks.py
