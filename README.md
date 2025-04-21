@@ -28,3 +28,10 @@ python yolo_tracking.py --source video --model yolo11n --tracker parameters
 
 To run script to plot tracking trajectory:
 python .\plotting_tracks.py
+
+Image classification:
+python image_classification_2.py
+Run this script to obain a classification of the file you input
+
+Convert model to ONNX, run an inference and generate an image with the results:
+python onnx_export.py
