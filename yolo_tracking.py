@@ -36,6 +36,8 @@ if args.source == "webcam":
         results = model.track(source=0, show=True, tracker='tracker_config/bytetrack.yaml')
     elif args.tracker == "botsort":
         results = model.track(source=0, show=True, tracker='tracker_config/botsort.yaml')
+    else:
+        results = model.track(source=0, show=True)
 
 
 elif args.source == "video":
@@ -56,3 +58,7 @@ elif args.source == "video":
             results = model.track(video_path, show=True, tracker='tracker_config/botsort.yaml')  # with BoT-SORT
     else:
         print("No video file selected. Exiting.")
+
+else:
+    print("Invalid source. Please choose 'webcam' or 'video'.")
+    sys.exit(1)
