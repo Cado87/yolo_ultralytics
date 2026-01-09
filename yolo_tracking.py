@@ -13,6 +13,8 @@ parser.add_argument("--model", type=str, required=True,
                     help="Path to the YOLO model file (e.g., yolov8m, yolo11n, yolo11n-seg, yolo11n-pose')")
 parser.add_argument("--tracker", type=str, choices=["default", "parameters", "bytetrack", "botsort"], default="default",
                     help="Choose the tracker: 'default', 'parameters', 'bytetrack', or 'botsort'")
+parser.add_argument("--conf", type=float, default=0.25,
+                    help="Confidence threshold for detections (0.0-1.0, default: 0.25)")
 args = parser.parse_args()
 
 
@@ -31,13 +33,13 @@ except Exception as e:
 if args.source == "webcam":
     # Perform tracking with the webcam
     if args.tracker == "default":
-        results = model.track(source=0, show=True)
+        results = model.track(source=0, conf=args.conf, show=True)
     elif args.tracker == "bytetrack":
-        results = model.track(source=0, show=True, tracker='tracker_config/bytetrack.yaml')
+        results = model.track(source=0, conf=args.conf, show=True, tracker='tracker_config/bytetrack.yaml')
     elif args.tracker == "botsort":
-        results = model.track(source=0, show=True, tracker='tracker_config/botsort.yaml')
+        results = model.track(source=0, conf=args.conf, show=True, tracker='tracker_config/botsort.yaml')
     else:
-        results = model.track(source=0, show=True)
+        results = model.track(source=0, conf=args.conf, show=True)
 
 
 elif args.source == "video":
@@ -49,13 +51,13 @@ elif args.source == "video":
     if video_path:
         # Perform tracking with the video file
         if args.tracker == "default":
-            results = model.track(video_path, show=True)  # Tracking with default tracker
+            results = model.track(video_path, conf=args.conf, show=True)  # Tracking with default tracker
         elif args.tracker == "parameters":
-            results = model.track(video_path, conf=0.3, iou=0.5, show=True)  # Tracking with confidence and IoU threshold
+            results = model.track(video_path, conf=args.conf, iou=0.5, show=True)  # Tracking with confidence and IoU threshold
         elif args.tracker == "bytetrack":
-            results = model.track(video_path, show=True, tracker='tracker_config/bytetrack.yaml')  # with ByteTrack
+            results = model.track(video_path, conf=args.conf, show=True, tracker='tracker_config/bytetrack.yaml')  # with ByteTrack
         elif args.tracker == "botsort":
-            results = model.track(video_path, show=True, tracker='tracker_config/botsort.yaml')  # with BoT-SORT
+            results = model.track(video_path, conf=args.conf, show=True, tracker='tracker_config/botsort.yaml')  # with BoT-SORT
     else:
         print("No video file selected. Exiting.")
 
